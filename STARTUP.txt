@@ -1,0 +1,241 @@
+🏦 AI RELATIONSHIP MANAGER FOR BANKS
+================================
+
+Complete working prototype with:
+✅ Full-stack Node.js + Express + PostgreSQL
+✅ Risk scoring engine (0-100 score system)
+✅ AI-powered outreach message generation
+✅ Interactive dashboard with filters
+✅ 25 realistic customer seed data
+✅ Complete API with 7 endpoints
+✅ Modern, responsive UI (no frameworks)
+
+QUICK START (5 MINUTES)
+=======================
+
+1. INSTALL DEPENDENCIES
+   $ npm install
+
+2. COPY ENVIRONMENT FILE
+   $ cp .env.example .env
+
+3. ENSURE PostgreSQL IS RUNNING
+   Windows: Use Services or Task Scheduler
+   macOS: brew services start postgresql
+   Linux: sudo service postgresql start
+
+4. SETUP DATABASE
+   $ node scripts/setup-db.js
+
+5. START SERVER
+   $ npm start
+
+6. OPEN BROWSER
+   http://localhost:3000
+
+✅ You're running!
+
+FOLDER STRUCTURE
+================
+
+relationship-manager-banks/
+├── backend/                          # Node.js backend
+│   ├── config/
+│   │   ├── database.js              # PostgreSQL connection
+│   │   └── openai.js                # OpenAI API + mock responses
+│   ├── models/
+│   │   ├── Customer.js              # Customer queries
+│   │   └── Interaction.js           # Interaction queries
+│   ├── services/
+│   │   ├── riskScoringService.js    # Risk calculation (0-100)
+│   │   └── outreachService.js       # Action recommendations & AI
+│   ├── controllers/
+│   │   └── customerController.js    # API handlers
+│   ├── routes/
+│   │   └── api.js                   # Route definitions
+│   └── server.js                    # Main Express app
+│
+├── frontend/                         # Vanilla JS frontend
+│   ├── index.html                   # Dashboard UI
+│   ├── styles.css                   # Modern responsive CSS
+│   └── app.js                       # Frontend logic
+│
+├── database/                        # SQL files
+│   ├── schema.sql                   # Table definitions
+│   └── seed.sql                     # 25 sample customers
+│
+├── scripts/
+│   └── setup-db.js                  # Database initialization
+│
+├── package.json                     # Dependencies
+├── .env.example                     # Environment template
+├── README.md                        # Full documentation
+└── QUICKSTART.sh                    # Automated setup
+
+API ENDPOINTS (7 TOTAL)
+=======================
+
+GET  /api/customers              - All customers with risk scores
+GET  /api/customers/:id          - Detailed profile + history
+POST /api/calculate-risk         - Recalculate all risk scores
+GET  /api/recommend-action/:id   - Get next best action
+POST /api/generate-outreach/:id  - Generate AI message
+POST /api/feedback/:id           - Record interaction outcome
+GET  /api/dashboard/stats        - Aggregate statistics
+
+DASHBOARD FEATURES
+==================
+
+✨ Real-time customer list
+   - Risk score (0-100)
+   - Account balance
+   - Color-coded risk level (🟢 LOW, 🟡 MEDIUM, 🔴 HIGH)
+
+📊 Top Analytics
+   - Total customers: 25
+   - High-risk count
+   - Medium-risk count
+   - Average risk score
+
+🔍 Top Churn Reasons
+   - Visual cards showing most common factors
+   - Impact frequency per reason
+
+🎯 Customer Detail View
+   - Full profile info
+   - Risk breakdown (readable reasons)
+   - Recommended action with priority
+   - One-click AI message generation
+   - Feedback recording (Retained/Churned)
+
+RISK SCORING ALGORITHM
+======================
+
+Points added for:
+• No transactions 10+ days           → +20
+• Login frequency < 3/week           → +15
+• Complaint count > 2                → +25
+• Balance drop (< 50% monthly avg)   → +20
+• No salary detected                 → +20
+• Low balance < $5,000               → +15
+
+Final Score Scale:
+  0-30   → LOW (Monitor)
+  30-70  → MEDIUM (Email + Incentive)
+  70-100 → HIGH (Call + Special Offer)
+
+AI OUTREACH FEATURES
+====================
+
+✓ Personalized messages using OpenAI GPT-3.5
+✓ Fallback to realistic mock responses (if no API key)
+✓ Context-aware based on risk level
+✓ Professional banking tone
+✓ Stored interaction history
+
+SAMPLE DATA
+===========
+
+25 realistic customers with:
+- Name, email, phone
+- Account balance: $1.5K - $215K
+- Risk profiles: LOW, MEDIUM, HIGH
+- Transaction history
+- Login frequency: 0-10/week
+- Complaint count: 0-6
+- Salary detection: true/false
+
+NEXT STEPS
+==========
+
+1. Install dependencies:  npm install
+2. Start PostgreSQL
+3. Setup database:        node scripts/setup-db.js
+4. Start server:          npm start
+5. Open:                  http://localhost:3000
+
+TROUBLESHOOTING
+===============
+
+❌ "connect ECONNREFUSED 127.0.0.1:5432"
+   → PostgreSQL not running
+   → Windows: Start from Services
+   → macOS: brew services start postgresql
+
+❌ "database does not exist"
+   → Run: node scripts/setup-db.js
+
+❌ Frontend not loading
+   → Ensure npm start is running
+   → Check http://localhost:3000
+
+❌ OpenAI errors
+   → Leave OPENAI_API_KEY commented in .env
+   → System will use mock responses automatically
+
+PRODUCTION ENHANCEMENTS
+=======================
+
+[ ] Authentication & authorization
+[ ] Real SMS/Email integration
+[ ] Historical trend analysis
+[ ] Machine learning predictions
+[ ] Docker containers
+[ ] AWS/Azure deployment
+[ ] Real-time notifications
+[ ] Advanced reporting
+
+DEMO WORKFLOW
+=============
+
+1. Open dashboard at http://localhost:3000
+2. View customers with risk levels
+3. Click "View Details" on high-risk customer
+4. See risk reasons and recommended action
+5. Click "Generate Message"
+6. System creates personalized AI message
+7. Click "Mark Responded - Retained"
+8. Dashboard updates with feedback
+
+FILES CREATED
+=============
+
+✓ Backend (11 files)
+  - config/database.js
+  - config/openai.js
+  - models/Customer.js
+  - models/Interaction.js
+  - services/riskScoringService.js
+  - services/outreachService.js
+  - controllers/customerController.js
+  - routes/api.js
+  - server.js
+  - package.json
+  - .env.example
+
+✓ Frontend (3 files)
+  - index.html
+  - styles.css
+  - app.js
+
+✓ Database (2 files)
+  - schema.sql
+  - seed.sql
+
+✓ Scripts & Documentation (5 files)
+  - scripts/setup-db.js
+  - README.md
+  - QUICKSTART.sh
+  - STARTUP.txt (this file)
+  - .gitignore (if applicable)
+
+TOTAL: 21 files organized in 7 directories
+
+READY TO GO! 🚀
+================
+
+$ npm install
+$ node scripts/setup-db.js
+$ npm start
+
+→ http://localhost:3000

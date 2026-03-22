@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Relationship Manager for Banks</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">AI Relationship Manager</h1>
+                <p class="subtitle">Predict. Explain. Retain.</p>
+            </div>
+        </header>
+
+        <!-- Main Container -->
+        <main class="main-container">
+            <!-- Dashboard View -->
+            <div id="dashboardView" class="view active">
+                <!-- Top Stats -->
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-label">Total Customers</div>
+                            <div class="stat-value" id="totalCustomers">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card critical">
+                        <div class="stat-content">
+                            <div class="stat-label">High Risk</div>
+                            <div class="stat-value" id="highRiskCount">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-content">
+                            <div class="stat-label">Medium Risk</div>
+                            <div class="stat-value" id="mediumRiskCount">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-label">Avg Risk Score</div>
+                            <div class="stat-value" id="avgRiskScore">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters and Controls -->
+                <div class="controls-section">
+                    <div class="search-box">
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search customers by name or email..."
+                            class="search-input"
+                        />
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="HIGH">High Risk</button>
+                        <button class="filter-btn" data-filter="MEDIUM">Medium Risk</button>
+                        <button class="filter-btn" data-filter="LOW">Low Risk</button>
+                    </div>
+                </div>
+
+                <!-- Top Churn Reasons -->
+                <div class="insights-section">
+                    <h2>[REPORT] Top Churn Reasons Analysis</h2>
+                    <div id="topReasonsContainer" class="reasons-grid"></div>
+                </div>
+
+                <!-- Customers Table -->
+                <div class="customers-section">
+                    <h2>Customers Dashboard</h2>
+                    <div class="table-wrapper">
+                        <table id="customersTable" class="customers-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Balance</th>
+                                    <th>Risk Score</th>
+                                    <th>Risk Level</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersTableBody">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Detail View -->
+            <div id="detailView" class="view">
+                <button class="back-btn" onclick="showDashboard()">[BACK] Back to Dashboard</button>
+
+                <div class="detail-container">
+                    <!-- Customer Info Card -->
+                    <div class="customer-info-card">
+                        <div class="customer-header">
+                            <div>
+                                <h2 id="detailCustomerName"></h2>
+                                <p id="detailCustomerEmail" class="email"></p>
+                                <p id="detailCustomerPhone" class="phone"></p>
+                            </div>
+                            <div id="riskBadge" class="risk-badge"></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">Account Balance</span>
+                                <span class="value" id="detailBalance">$0</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Risk Score</span>
+                                <span class="value score-display" id="detailRiskScore">0/100</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Last Transaction</span>
+                                <span class="value" id="detailLastTransaction">N/A</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Login Activity</span>
+                                <span class="value" id="detailLoginFreq">0/week</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Reasons -->
+                    <div class="risk-reasons-card">
+                        <h3>Risk Analysis - Why They're at Risk</h3>
+                        <ul id="riskReasonsList" class="reasons-list">
+                            <!-- Populated by JavaScript -->
+                        </ul>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="actions-card">
+                        <h3>Recommended Actions</h3>
+                        <div id="actionDetails" class="action-details">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- AI Outreach Message -->
+                    <div class="outreach-card">
+                        <h3>AI-Generated Outreach Message</h3>
+                        <div id="outreachContainer" class="outreach-container">
+                            <button
+                                id="generateOutreachBtn"
+                                class="btn btn-primary"
+                                onclick="generateOutreach()"
+                            >
+                                Generate Message
+                            </button>
+                        </div>
+                        <div id="outreachMessage" class="outreach-message"></div>
+                    </div>
+
+                    <!-- Feedback -->
+                    <div class="feedback-card">
+                        <h3>Record Interaction Outcome</h3>
+                        <div class="feedback-buttons">
+                            <button class="btn btn-success" onclick="recordFeedback('responded', 'retained')">
+                                [OK] Marked Responded - Retained
+                            </button>
+                            <button class="btn btn-warning" onclick="recordFeedback('ignored', 'churned')">
+                                [X] Marked Ignored - Churned
+                            </button>
+                        </div>
+                        <div id="feedbackStatus" class="feedback-status"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
